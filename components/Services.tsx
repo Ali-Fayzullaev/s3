@@ -1,6 +1,8 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
 import { 
   Shield, 
   Sparkles, 
@@ -11,12 +13,35 @@ import {
   Square, 
   Layers, 
   Settings, 
-  VolumeX 
+  VolumeX,
+  ArrowRight
 } from 'lucide-react'
 import { useApp } from '../lib/context'
+import ServiceModal from './ServiceModal'
 
 export default function Services() {
   const { t } = useApp()
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    serviceName: '',
+    serviceId: ''
+  })
+
+  const openModal = (serviceName: string, serviceId: string) => {
+    setModalState({
+      isOpen: true,
+      serviceName,
+      serviceId
+    })
+  }
+
+  const closeModal = () => {
+    setModalState({
+      isOpen: false,
+      serviceName: '',
+      serviceId: ''
+    })
+  }
 
   const services = [
     {
@@ -102,90 +127,112 @@ export default function Services() {
   ]
 
   return (
-    <section id="services" className="py-20 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-            <Palette className="w-4 h-4 mr-2" />
-            <span>Наши специализации</span>
-          </div>
-          
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            {t('servicesTitle')}
-          </h2>
-          
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t('servicesSubtitle')}
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => {
-            const IconComponent = service.icon
+    <>
+      <section id="services" className="py-20 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+              <Palette className="w-4 h-4 mr-2" />
+              <span>Наши специализации</span>
+            </div>
             
-            return (
-              <div
-                key={service.id}
-                className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <div className={`absolute inset-0 bg-linear-to-br ${service.gradient}`} />
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
-                  
-                  {/* Icon */}
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <IconComponent className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-card-foreground mb-3 group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    {service.description}
-                  </p>
-
-                  {/* CTA */}
-                  <button className="w-full bg-primary/5 hover:bg-primary hover:text-primary-foreground text-primary py-3 rounded-xl font-medium transition-all duration-300 group-hover:shadow-lg">
-                    Узнать больше
-                  </button>
-                </div>
-
-                {/* Hover effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-card rounded-2xl p-8 shadow-lg">
-            <h3 className="text-2xl font-bold text-card-foreground mb-4">
-              Не знаете, какую услугу выбрать?
-            </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Наши специалисты помогут подобрать оптимальный пакет услуг для вашего автомобиля
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              {t('servicesTitle')}
+            </h2>
+            
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              {t('servicesSubtitle')}
             </p>
-            <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
-              Получить консультацию
-            </button>
+          </div>
+
+          {/* Services Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => {
+              const IconComponent = service.icon
+              
+              return (
+                <div
+                  key={service.id}
+                  className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <div className={`absolute inset-0 bg-linear-to-br ${service.gradient}`} />
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+                    
+                    {/* Icon */}
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center backdrop-blur-sm">
+                      <IconComponent className="w-6 h-6 text-primary" />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-card-foreground mb-3 group-hover:text-primary transition-colors">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                      {service.description}
+                    </p>
+
+                    {/* CTAs */}
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/services/${service.id}`}
+                        className="flex-1 bg-primary/5 hover:bg-primary hover:text-primary-foreground text-primary py-3 rounded-xl font-medium transition-all duration-300 group-hover:shadow-lg flex items-center justify-center"
+                      >
+                        Подробнее
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Link>
+                      <button 
+                        onClick={() => openModal(service.title, service.id)}
+                        className="px-4 py-3 bg-secondary hover:bg-accent text-secondary-foreground rounded-xl font-medium transition-all duration-300"
+                      >
+                        Заказать
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Hover effect overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-16">
+            <div className="bg-card rounded-2xl p-8 shadow-lg">
+              <h3 className="text-2xl font-bold text-card-foreground mb-4">
+                Не знаете, какую услугу выбрать?
+              </h3>
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Наши специалисты помогут подобрать оптимальный пакет услуг для вашего автомобиля
+              </p>
+              <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
+                Получить консультацию
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Modal */}
+      <ServiceModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        serviceName={modalState.serviceName}
+        serviceId={modalState.serviceId}
+      />
+    </>
   )
 }

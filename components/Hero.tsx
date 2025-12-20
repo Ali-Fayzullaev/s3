@@ -2,6 +2,7 @@
 
 import { ArrowRight, Play } from 'lucide-react'
 import { useApp } from '../lib/context'
+import Image from 'next/image'
 
 export default function Hero() {
   const { t } = useApp()
@@ -66,17 +67,7 @@ export default function Hero() {
           <div className="relative">
             <div className="relative group">
               {/* Main car image placeholder - would use your logo or car image */}
-              <div className="w-full h-96 bg-linear-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center transform group-hover:scale-105 transition-all duration-500">
-                <div className="text-center">
-                  <div className="w-32 h-32 bg-primary rounded-full flex items-center justify-center mb-4 mx-auto">
-                    <svg className="w-20 h-20 text-primary-foreground" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">Ваш логотип</h3>
-                  <p className="text-muted-foreground">DetailPro Studio</p>
-                </div>
-              </div>
+             <img src='/logo.png' alt='Logo' className='w-full h-auto' />
 
               {/* Floating elements */}
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center animate-bounce">
