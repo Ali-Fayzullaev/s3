@@ -28,6 +28,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     
     if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
       setTheme(savedTheme)
+    } else {
+      // Определяем системную тему по умолчанию
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      setTheme(systemTheme)
     }
   }, [])
 
@@ -37,7 +41,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     localStorage.setItem('theme', theme)
-    document.documentElement.setAttribute('data-theme', theme)
+    
+    // Применяем тему через класс на html элементе для Tailwind CSS
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
   }, [theme])
 
   const t = (key: TranslationKey): string => {
