@@ -48,13 +48,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   <div className="text-sm text-muted-foreground mb-1">Время работы</div>
                   <div className="font-semibold text-card-foreground">{service.duration}</div>
                 </div>
-                
-                <div className="text-center p-4 bg-card rounded-xl border">
-                  <DollarSign className="w-6 h-6 text-primary mx-auto mb-2" />
-                  <div className="text-sm text-muted-foreground mb-1">Стоимость</div>
-                  <div className="font-semibold text-card-foreground">{service.priceRange.ru}</div>
-                </div>
-                
                 <div className="text-center p-4 bg-card rounded-xl border">
                   <Shield className="w-6 h-6 text-primary mx-auto mb-2" />
                   <div className="text-sm text-muted-foreground mb-1">Гарантия</div>

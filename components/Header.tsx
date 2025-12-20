@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Menu, X, Sun, Moon, Globe, Car } from 'lucide-react'
 import { useApp } from '../lib/context'
+import { COMPANY_CONFIG } from '../lib/company-config'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,11 +22,14 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <Car className="w-6 h-6 text-primary-foreground" />
+              <span className="text-primary-foreground font-bold text-lg">S3</span>
             </div>
-            <span className="text-xl font-bold text-foreground">DetailPro</span>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-foreground">{COMPANY_CONFIG.name}</span>
+              <span className="text-xs text-muted-foreground hidden sm:block">PREMIUM DETAILING</span>
+            </div>
           </div>
 
           {/* Desktop Navigation */}

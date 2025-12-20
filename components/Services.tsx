@@ -218,7 +218,7 @@ export default function Services() {
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                 Наши специалисты помогут подобрать оптимальный пакет услуг для вашего автомобиля
               </p>
-              <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
+              <button onClick={() => openModal('', '')} className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
                 Получить консультацию
               </button>
             </div>
