@@ -1,6 +1,7 @@
 import Header from "../components/Header"
 import Hero from "../components/Hero"
 import Services from "../components/Services"
+import CarBrands from "../components/CarBrands"
 import About from "../components/About"
 import FAQ from "../components/FAQ"
 import ContactSection from "../components/ContactSection"
@@ -13,6 +14,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <CarBrands />
         <About />
         <FAQ />
         <ContactSection />

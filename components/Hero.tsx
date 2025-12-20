@@ -5,34 +5,21 @@ import { useApp } from '../lib/context'
 import { COMPANY_CONFIG } from '../lib/company-config'
 
 export default function Hero() {
-  const { t } = useApp()
+  const { t, theme } = useApp()
+
+  // Выбираем фоновое изображение в зависимости от темы
+  const backgroundImage = theme === 'dark' ? '/hero_fon_dark.png' : '/hero_fon.jpg'
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Video with Fallback Image */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        {/* Fallback Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500"
           style={{
-            backgroundImage: "url('/hero_fon.jpg')"
+            backgroundImage: `url('${backgroundImage}')`
           }}
         />
-        
-        {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          onError={(e) => {
-            // Hide video on error, fallback to background image
-            e.currentTarget.style.display = 'none'
-          }}
-        >
-          <source src="/s3_hero_video.mp4" type="video/mp4" />
-        </video>
         
         {/* Professional Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60" />
@@ -97,49 +84,29 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Enhanced Visual Content */}
+          {/* Enhanced Visual Content with Video */}
           <div className="relative lg:ml-8">
             <div className="relative group">
-              {/* Main Showcase Card */}
-              <div className="relative w-full h-[500px] bg-white/5 backdrop-blur-xl rounded-3xl flex items-center justify-center transform group-hover:scale-105 transition-all duration-700 border border-white/20 shadow-2xl overflow-hidden">
-                {/* Card Background Pattern */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-primary/20" />
-                  <div className="absolute top-0 left-0 w-full h-full bg-grid-white/[0.05] bg-[size:20px_20px]" />
-                </div>
+              {/* Video Card */}
+              <div className="relative w-full h-[500px] bg-black/20 backdrop-blur-xl rounded-3xl overflow-hidden transform group-hover:scale-105 transition-all duration-700 border border-white/20 shadow-2xl">
+                {/* Background Video */}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback to gradient background on error
+                    e.currentTarget.style.display = 'none'
+                  }}
+                >
+                  <source src="/s3_hero_video.mp4" type="video/mp4" />
+                </video>
                 
-                <div className="relative z-10 text-center px-8">
-                  <div className="relative mb-8">
-                    <div className="w-40 h-40 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center mx-auto shadow-2xl">
-                      <span className="text-primary-foreground font-black text-5xl">S3</span>
-                    </div>
-                    {/* Glow Effect */}
-                    <div className="absolute inset-0 w-40 h-40 bg-primary/30 rounded-full blur-xl mx-auto animate-pulse" />
-                  </div>
-                  
-                  <h3 className="text-3xl font-black text-white mb-3 drop-shadow-xl">{COMPANY_CONFIG.name}</h3>
-                  <p className="text-white/80 text-lg font-medium mb-6">Premium Detailing Studio</p>
-                  
-                  <div className="inline-block px-6 py-3 bg-primary/20 backdrop-blur-sm rounded-full border border-primary/40">
-                    <span className="text-white font-bold text-sm flex items-center">
-                      <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                      Алматы • Белые воды
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Achievement Badges */}
-              <div className="absolute -top-6 -right-6 w-28 h-28 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center animate-bounce border-4 border-white/20 shadow-xl">
-                <span className="text-3xl">🏆</span>
-              </div>
-              
-              <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center animate-pulse border-4 border-white/20 shadow-xl">
-                <span className="text-2xl">⭐</span>
-              </div>
-              
-              <div className="absolute top-1/4 -left-4 w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center animate-ping border-4 border-white/20 shadow-xl">
-                <span className="text-lg">💎</span>
+                {/* Video Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+                
               </div>
             </div>
           </div>
@@ -156,11 +123,11 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Video Status Indicator */}
+      {/* Video Status Indicator for main video */}
       <div className="absolute bottom-6 right-6 z-30 opacity-60 hover:opacity-100 transition-opacity duration-300">
         <div className="flex items-center space-x-2 bg-black/30 backdrop-blur-md rounded-xl px-4 py-2 border border-white/20">
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-          <span className="text-white text-xs font-bold tracking-wide">S3 DETAILING</span>
+          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          <span className="text-white text-xs font-bold tracking-wide">S3 SHOWCASE</span>
         </div>
       </div>
 

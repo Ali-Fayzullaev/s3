@@ -108,3 +108,39 @@ html {
 .slide-in-left {
   animation: slideInFromLeft 0.8s ease-out forwards;
 }
+
+/* Car Brands Animations */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll-reverse {
+  animation: scroll-reverse 30s linear infinite;
+}
+
+/* Grid pattern */
+.bg-grid-black\/\[0\.02\] {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+}
+
+.bb {
+  border: 2px solid red;
+}
