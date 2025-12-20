@@ -180,56 +180,6 @@ export default function ContactSection() {
                   </a>
                 </div>
               </div>
-
-              {/* Working Hours Card */}
-              <div className="bg-card rounded-2xl p-8 border border-border shadow-lg">
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <Clock className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold text-card-foreground">Режим работы</h3>
-                </div>
-                
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Понедельник - Суббота</span>
-                    <span className="font-semibold text-card-foreground">9:00 - 19:00</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Воскресенье</span>
-                    <span className="font-semibold text-red-500">Выходной</span>
-                  </div>
-                </div>
-                
-                <div className="mt-6 p-4 bg-primary/5 rounded-xl">
-                  <p className="text-sm text-primary font-medium">
-                    💡 {COMPANY_CONFIG.workingHours[language].note}
-                  </p>
-                </div>
-              </div>
-
-              {/* Email Card */}
-              <div className="bg-card rounded-2xl p-8 border border-border shadow-lg">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                      <Mail className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-card-foreground">Email</h3>
-                      <p className="text-muted-foreground">{COMPANY_CONFIG.contacts.email}</p>
-                    </div>
-                  </div>
-                  
-                  <a
-                    href={`mailto:${COMPANY_CONFIG.contacts.email}`}
-                    className="p-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl transition-colors duration-300"
-                    title="Написать email"
-                  >
-                    <Mail className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
             </div>
 
             {/* Interactive Map */}

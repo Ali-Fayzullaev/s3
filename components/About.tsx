@@ -93,7 +93,7 @@ export default function About() {
             
             <div className="absolute -bottom-8 -left-8 bg-card rounded-2xl p-6 shadow-xl border">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">500+</div>
+                <div className="text-3xl font-bold text-primary mb-1">1000+</div>
                 <div className="text-sm text-muted-foreground">Довольных клиентов</div>
               </div>
             </div>

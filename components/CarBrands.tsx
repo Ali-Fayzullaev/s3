@@ -93,13 +93,13 @@ export default function CarBrands() {
         <div className="relative">
           {/* Infinite Scroll Animation */}
           <div className="overflow-hidden">
-            <div className="flex animate-scroll space-x-12 mb-12">
+            <div className="flex animate-scroll space-x-6 md:space-x-12 mb-8 md:mb-12">
               {[...carBrands, ...carBrands].map((brand, index) => (
                 <div
                   key={`${brand.name}-${index}`}
-                  className="group flex-shrink-0 w-32 h-32 bg-card rounded-2xl flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-border hover:border-primary/30"
+                  className="group flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 bg-card rounded-xl md:rounded-2xl flex items-center justify-center shadow-md hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-border hover:border-primary/30"
                 >
-                  <div className="relative w-20 h-20">
+                  <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20">
                     <Image
                       src={brand.logo}
                       alt={brand.alt}
@@ -112,13 +112,13 @@ export default function CarBrands() {
             </div>
 
             {/* Second row with reverse animation */}
-            <div className="flex animate-scroll-reverse space-x-12">
+            <div className="flex animate-scroll-reverse space-x-6 md:space-x-12">
               {[...carBrands.slice().reverse(), ...carBrands.slice().reverse()].map((brand, index) => (
                 <div
                   key={`reverse-${brand.name}-${index}`}
-                  className="group flex-shrink-0 w-32 h-32 bg-card rounded-2xl flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-border hover:border-primary/30"
+                  className="group flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 bg-card rounded-xl md:rounded-2xl flex items-center justify-center shadow-md hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-border hover:border-primary/30"
                 >
-                  <div className="relative w-20 h-20">
+                  <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20">
                     <Image
                       src={brand.logo}
                       alt={brand.alt}
@@ -131,54 +131,54 @@ export default function CarBrands() {
             </div>
           </div>
 
-          {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent pointer-events-none z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" />
+          {/* Gradient Overlays - адаптивные */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-background to-transparent pointer-events-none z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" />
         </div>
 
-        {/* Features */}
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
+        {/* Features - адаптивная сетка */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mt-16 md:mt-20">
           <div className="text-center group">
-            <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-              <span className="text-2xl group-hover:scale-125 transition-transform duration-300">🔧</span>
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+              <span className="text-xl md:text-2xl group-hover:scale-125 transition-transform duration-300">🔧</span>
             </div>
-            <h3 className="text-xl font-bold text-card-foreground mb-2">Индивидуальный подход</h3>
-            <p className="text-muted-foreground">
+            <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-2">Индивидуальный подход</h3>
+            <p className="text-sm md:text-base text-muted-foreground">
               Учитываем особенности каждой марки и модели автомобиля
             </p>
           </div>
           
           <div className="text-center group">
-            <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-              <span className="text-2xl group-hover:scale-125 transition-transform duration-300">⚡</span>
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+              <span className="text-xl md:text-2xl group-hover:scale-125 transition-transform duration-300">⚡</span>
             </div>
-            <h3 className="text-xl font-bold text-card-foreground mb-2">Современные технологии</h3>
-            <p className="text-muted-foreground">
+            <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-2">Современные технологии</h3>
+            <p className="text-sm md:text-base text-muted-foreground">
               Используем передовые материалы и оборудование для всех марок
             </p>
           </div>
           
           <div className="text-center group">
-            <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-              <span className="text-2xl group-hover:scale-125 transition-transform duration-300">🛡️</span>
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+              <span className="text-xl md:text-2xl group-hover:scale-125 transition-transform duration-300">🛡️</span>
             </div>
-            <h3 className="text-xl font-bold text-card-foreground mb-2">Гарантия качества</h3>
-            <p className="text-muted-foreground">
+            <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-2">Гарантия качества</h3>
+            <p className="text-sm md:text-base text-muted-foreground">
               Предоставляем гарантию на все виды работ независимо от марки авто
             </p>
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-card rounded-2xl p-8 shadow-xl border border-border">
-            <h3 className="text-2xl font-bold text-card-foreground mb-4">
+        {/* Call to Action - адаптивный */}
+        <div className="text-center mt-12 md:mt-16">
+          <div className="bg-card rounded-xl md:rounded-2xl p-6 md:p-8 shadow-xl border border-border">
+            <h3 className="text-xl md:text-2xl font-bold text-card-foreground mb-3 md:mb-4">
               Не видите свою марку?
             </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 max-w-2xl mx-auto">
               Мы работаем с автомобилями любых марок и моделей. Свяжитесь с нами, и мы подберем оптимальные услуги для вашего авто.
             </p>
-            <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+            <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-xl font-semibold text-sm md:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
               Узнать подробности
             </button>
           </div>

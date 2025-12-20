@@ -1,14 +1,26 @@
 'use client'
 
-import { ArrowRight, Play } from 'lucide-react'
+import { ArrowRight, Play, MessageCircle } from 'lucide-react'
+import { useState } from 'react'
 import { useApp } from '../lib/context'
 import { COMPANY_CONFIG } from '../lib/company-config'
+import QuoteModal from './QuoteModal'
+import VideoModal from './VideoModal'
 
 export default function Hero() {
   const { t, theme } = useApp()
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false)
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
 
   // Выбираем фоновое изображение в зависимости от темы
-  const backgroundImage = theme === 'dark' ? '/hero_fon_dark.png' : '/hero_fon.jpg'
+  const backgroundImage = theme === 'dark' ? '/fon_dark_hero.jpg' : '/fon_light_hero.jpg'
+
+  const handleWhatsAppClick = () => {
+    const phoneNumber = '+77777777777' // Замените на ваш номер WhatsApp
+    const message = 'Здравствуйте! Интересуюсь услугами детейлинга'
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
+  }
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -17,14 +29,15 @@ export default function Hero() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500"
           style={{
-            backgroundImage: `url('${backgroundImage}')`
+            backgroundImage: `url('${backgroundImage}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center'
           }}
         />
         
         {/* Professional Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent" />
       </div>
 
       {/* Animated Particles */}
@@ -41,54 +54,72 @@ export default function Hero() {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-md text-white text-sm font-medium mb-8 fade-in-up border border-white/20 shadow-xl">
               <span className="w-2 h-2 bg-primary rounded-full mr-3 animate-pulse"></span>
-              <span>✨ {COMPANY_CONFIG.name} - Премиум детейлинг</span>
+              <span>{COMPANY_CONFIG.name} - Премиум детейлинг</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight slide-in-left">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-white mb-6 md:mb-8 leading-tight slide-in-left">
               <span className="bg-gradient-to-r from-white via-white to-primary/80 bg-clip-text text-transparent drop-shadow-2xl">
                 {t('heroTitle')}
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-white/90 mb-10 max-w-2xl fade-in-up leading-relaxed font-light">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 mb-8 md:mb-10 max-w-2xl fade-in-up leading-relaxed font-light">
               {COMPANY_CONFIG.description}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start fade-in-up">
-              <button className="group relative bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-5 rounded-2xl font-bold text-lg transition-all duration-500 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center overflow-hidden">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start fade-in-up">
+              {/* Кнопка "Получить расчет" */}
+              <button 
+                onClick={() => setIsQuoteModalOpen(true)}
+                className="group relative bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-base md:text-lg transition-all duration-500 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center overflow-hidden"
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 <span className="relative z-10">{t('getQuote')}</span>
-                <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                <ArrowRight className="ml-2 md:ml-3 w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform duration-300" />
               </button>
               
-              <button className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/25 hover:border-white/50 px-10 py-5 rounded-2xl font-bold text-lg transition-all duration-500 flex items-center justify-center">
-                <Play className="mr-3 w-6 h-6 group-hover:scale-125 transition-transform duration-300" />
+              {/* Кнопка для мобильных - "Наши работы" */}
+              <button 
+                onClick={() => setIsVideoModalOpen(true)}
+                className="group relative bg-white/15 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/25 hover:border-white/50 px-6 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-base md:text-lg transition-all duration-500 flex items-center justify-center md:hidden"
+              >
+                <Play className="mr-2 md:mr-3 w-5 h-5 md:w-6 md:h-6 group-hover:scale-125 transition-transform duration-300" />
                 <span>{t('ourWork')}</span>
+              </button>
+
+              {/* Кнопка для десктопа - WhatsApp */}
+              <button 
+                onClick={handleWhatsAppClick}
+                className="group relative bg-green-600 hover:bg-green-700 text-white px-6 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-base md:text-lg transition-all duration-500 transform hover:scale-105 hover:shadow-2xl items-center justify-center overflow-hidden hidden md:flex"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                <MessageCircle className="mr-2 md:mr-3 w-5 h-5 md:w-6 md:h-6 relative z-10" />
+                <span className="relative z-10">WhatsApp</span>
               </button>
             </div>
 
             {/* Enhanced Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/20 fade-in-up">
+            <div className="grid grid-cols-3 gap-4 md:gap-8 mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/20 fade-in-up">
               <div className="text-center group">
-                <div className="text-3xl md:text-4xl font-black text-white drop-shadow-xl mb-2 group-hover:text-primary transition-colors duration-300">1000+</div>
-                <div className="text-sm text-white/80 font-medium">Довольных клиентов</div>
+                <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">1000+</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium">Довольных клиентов</div>
               </div>
               <div className="text-center group">
-                <div className="text-3xl md:text-4xl font-black text-white drop-shadow-xl mb-2 group-hover:text-primary transition-colors duration-300">7+</div>
-                <div className="text-sm text-white/80 font-medium">Лет опыта</div>
+                <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">5+</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium">Лет опыта</div>
               </div>
               <div className="text-center group">
-                <div className="text-3xl md:text-4xl font-black text-white drop-shadow-xl mb-2 group-hover:text-primary transition-colors duration-300">10</div>
-                <div className="text-sm text-white/80 font-medium">Видов услуг</div>
+                <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">10</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium">Видов услуг</div>
               </div>
             </div>
           </div>
 
-          {/* Enhanced Visual Content with Video */}
-          <div className="relative lg:ml-8">
+          {/* Enhanced Visual Content with Video - скрыто на мобильных */}
+          <div className="relative lg:ml-8 hidden md:block">
             <div className="relative group">
-              {/* Video Card */}
-              <div className="relative w-full h-[500px] bg-black/20 backdrop-blur-xl rounded-3xl overflow-hidden transform group-hover:scale-105 transition-all duration-700 border border-white/20 shadow-2xl">
+              {/* Video Card - уменьшенный размер для десктопа */}
+              <div className="relative w-full h-[350px] lg:h-[400px] bg-black/20 backdrop-blur-xl rounded-2xl overflow-hidden transform group-hover:scale-105 transition-all duration-700 border border-white/20 shadow-2xl">
                 {/* Background Video */}
                 <video
                   autoPlay
@@ -131,9 +162,15 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Ambient Light Effects */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse opacity-50" />
-      <div className="absolute bottom-20 right-10 w-80 h-80 bg-white/5 rounded-full blur-3xl animate-pulse delay-1000 opacity-30" />
+      {/* Модальные окна */}
+      <QuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
+      <VideoModal 
+        isOpen={isVideoModalOpen} 
+        onClose={() => setIsVideoModalOpen(false)} 
+      />
     </section>
   )
 }

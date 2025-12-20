@@ -16,7 +16,6 @@ export const COMPANY_CONFIG = {
       '8 (747) 204 07 00',
       '8 (707) 766 07 00'
     ],
-    email: 'info@s3detailing.kz',
     
     // Адрес
     address: {
@@ -57,19 +56,6 @@ export const COMPANY_CONFIG = {
     doubleGis: 'https://go.2gis.com/Rect5'
   },
 
-  // Режим работы
-  workingHours: {
-    ru: {
-      weekdays: 'Пн-Сб: 9:00 - 19:00',
-      sunday: 'Воскресенье: выходной',
-      note: 'Работаем по предварительной записи'
-    },
-    kz: {
-      weekdays: 'Дс-Сн: 9:00 - 19:00',
-      sunday: 'Жексенбі: демалыс',
-      note: 'Алдын ала жазылу бойынша жұмыс істейміз'
-    }
-  },
 
   // Особенности
   features: {

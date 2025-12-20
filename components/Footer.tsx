@@ -25,23 +25,11 @@ export default function Footer() {
       link: `tel:${COMPANY_CONFIG.contacts.phone.formatted}`
     },
     {
-      icon: Mail,
-      title: t('email'),
-      info: COMPANY_CONFIG.contacts.email,
-      link: `mailto:${COMPANY_CONFIG.contacts.email}`
-    },
-    {
       icon: MapPin,
       title: t('address'),
       info: COMPANY_CONFIG.contacts.address.full,
       link: getGoogleMapsLink()
     },
-    {
-      icon: Clock,
-      title: 'Режим работы',
-      info: COMPANY_CONFIG.workingHours[language].weekdays,
-      link: '#'
-    }
   ]
 
   const additionalPhones = COMPANY_CONFIG.contacts.additionalPhones.map(phone => ({
@@ -264,11 +252,6 @@ export default function Footer() {
                   )
                 })}
               </div>
-            </div>
-
-            <div className="text-sm text-muted-foreground">
-              <div className="mb-2">⏰ {COMPANY_CONFIG.workingHours[language].weekdays}</div>
-              <div className="mb-2">📞 {COMPANY_CONFIG.workingHours[language].note}</div>
             </div>
           </div>
         </div>
