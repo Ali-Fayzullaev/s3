@@ -35,9 +35,9 @@ export default function Hero() {
           }}
         />
         
-        {/* Professional Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/50" />
+        {/* Professional Overlays - заменяем градиенты */}
+        <div className="absolute inset-0 bg-black opacity-60" />
+        <div className="absolute inset-0 bg-black opacity-30" />
       </div>
 
       {/* Animated Particles */}
@@ -58,7 +58,7 @@ export default function Hero() {
             </div>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-white mb-6 md:mb-8 leading-tight slide-in-left">
-              <span className="bg-gradient-to-r from-white via-white to-primary/80 bg-clip-text text-transparent drop-shadow-2xl">
+              <span className="text-white drop-shadow-2xl">
                 {t('heroTitle')}
               </span>
             </h1>
@@ -102,11 +102,11 @@ export default function Hero() {
             <div className="grid grid-cols-3 gap-4 md:gap-8 mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/20 fade-in-up">
               <div className="text-center group">
                 <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">1000+</div>
-                <div className="text-xs md:text-sm text-white/80 font-medium">{t('satisfiedClients')}</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium">{t('happyClients')}</div>
               </div>
               <div className="text-center group">
                 <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">5+</div>
-                <div className="text-xs md:text-sm text-white/80 font-medium">{t('yearsOfExperience')}</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium">{t('yearsExperience')}</div>
               </div>
               <div className="text-center group">
                 <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">10</div>
@@ -136,7 +136,7 @@ export default function Hero() {
                 </video>
                 
                 {/* Video Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+                <div className="absolute inset-0 bg-black bg-opacity-40" />
                 
               </div>
             </div>

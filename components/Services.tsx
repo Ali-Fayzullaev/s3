@@ -146,7 +146,7 @@ export default function Services() {
               {t('servicesDescription')}
             </p>
             
-            <div className="w-32 h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-8 rounded-full"></div>
+            <div className="w-32 h-1 bg-primary mx-auto mt-8 rounded-full"></div>
           </div>
 
           {/* Services Grid */}

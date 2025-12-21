@@ -16,7 +16,9 @@ export const translations = {
     
     // Stats
     happyClients: "Довольных клиентов",
+    satisfiedClients: "Довольных клиентов", 
     yearsExperience: "Лет опыта",
+    yearsOfExperience: "Лет опыта",
     typesOfServices: "Видов услуг",
     scrollDown: "ПРОКРУТИТЕ ВНИЗ",
     
@@ -198,7 +200,9 @@ export const translations = {
     
     // Stats
     happyClients: "Қанағаттанған клиенттер",
+    satisfiedClients: "Қанағаттанған клиенттер", 
     yearsExperience: "Жыл тәжірибе",
+    yearsOfExperience: "Жыл тәжірибе",
     typesOfServices: "Қызмет түрлері",
     scrollDown: "ТӨМЕНГЕ СЫРҒЫТЫҢЫЗ",
     

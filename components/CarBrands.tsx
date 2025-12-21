@@ -31,9 +31,7 @@ export default function CarBrands() {
   return (
     <section className="py-20 px-4 bg-secondary relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"></div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
@@ -61,7 +59,7 @@ export default function CarBrands() {
               {duplicatedBrands.map((brand, index) => (
                 <div
                   key={`row1-${index}`}
-                  className="flex-shrink-0 mx-6"
+                  className="shrink-0 mx-6"
                 >
                   <div className="group relative w-32 h-32 bg-card border border-border rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center p-4">
                     {/* Logo */}
@@ -97,7 +95,7 @@ export default function CarBrands() {
               {duplicatedBrands.map((brand, index) => (
                 <div
                   key={`row2-${index}`}
-                  className="flex-shrink-0 mx-6"
+                  className="shrink-0 mx-6"
                 >
                   <div className="group relative w-32 h-32 bg-card border border-border rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center p-4">
                     {/* Logo */}
@@ -133,7 +131,7 @@ export default function CarBrands() {
               {duplicatedBrands.map((brand, index) => (
                 <div
                   key={`row3-${index}`}
-                  className="flex-shrink-0 mx-6"
+                  className="shrink-0 mx-6"
                 >
                   <div className="group relative w-32 h-32 bg-card border border-border rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center p-4">
                     {/* Logo */}

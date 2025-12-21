@@ -37,6 +37,7 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
         serviceName,
         clientName: formData.clientName,
         clientPhone: formData.clientPhone,
+        message: `Заявка на услугу: ${serviceName}. ${formData.carModel ? `Автомобиль: ${formData.carModel}` : 'Модель автомобиля не указана.'}`,
         carModel: formData.carModel || undefined
       }
 

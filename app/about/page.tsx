@@ -67,7 +67,7 @@ export default function AboutPage() {
     },
     {
       icon: Calendar,
-      number: "8+",
+      number: "5+",
       label: t('yearsExperience'),
       description: "В сфере детейлинга"
     },
@@ -160,11 +160,11 @@ export default function AboutPage() {
                 {/* Quick Stats */}
                 <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border">
                   <div className="text-center p-4">
-                    <div className="text-2xl font-bold text-primary mb-1">5000+</div>
+                    <div className="text-2xl font-bold text-primary mb-1">1000+</div>
                     <div className="text-sm text-muted-foreground">Обслуженных авто</div>
                   </div>
                   <div className="text-center p-4">
-                    <div className="text-2xl font-bold text-primary mb-1">8+</div>
+                    <div className="text-2xl font-bold text-primary mb-1">5+</div>
                     <div className="text-sm text-muted-foreground">Лет опыта</div>
                   </div>
                 </div>
@@ -178,9 +178,9 @@ export default function AboutPage() {
                     alt="Наша команда за работой"
                     width={600}
                     height={400}
-                    className="object-cover w-full h-[400px]"
+                    className="object-cover w-full h-96"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-black bg-opacity-20"></div>
                 </div>
                 
                 {/* Floating badge */}
@@ -244,7 +244,7 @@ export default function AboutPage() {
               {teamMembers.map((member, index) => (
                 <div key={index} className="bg-card p-6 rounded-xl shadow-sm border border-border">
                   <div className="flex items-start space-x-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center shrink-0">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center shrink-0">
                       <span className="text-primary-foreground font-bold text-lg">{member.initials}</span>
                     </div>
                     <div className="flex-1">
