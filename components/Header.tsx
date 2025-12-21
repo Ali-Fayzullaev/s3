@@ -1,21 +1,22 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Menu, X, Sun, Moon, Globe, Car } from 'lucide-react'
-import { useApp } from '../lib/context'
-import { COMPANY_CONFIG } from '../lib/company-config'
+import { useState } from "react";
+import { Menu, X, Sun, Moon, Globe, Car } from "lucide-react";
+import { useApp } from "../lib/context";
+import { COMPANY_CONFIG } from "../lib/company-config";
+import Image from "next/image";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { language, setLanguage, theme, setTheme, t } = useApp()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, setLanguage, theme, setTheme, t } = useApp();
 
   const navigation = [
-    { name: t('home'), href: '#home' },
-    { name: t('services'), href: '#services' },
-    { name: t('about'), href: '#about' },
-    { name: t('faq'), href: '#faq' },
-    { name: t('contact'), href: '#contact' }
-  ]
+    { name: t("home"), href: "#home" },
+    { name: t("services"), href: "#services" },
+    { name: t("about"), href: "#about" },
+    { name: t("faq"), href: "#faq" },
+    { name: t("contact"), href: "#contact" },
+  ];
 
   return (
     <header className="fixed top-0 w-full bg-background/90 backdrop-blur-lg border-b border-border z-50">
@@ -23,12 +24,23 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">S3</span>
+            <div className="flex items-center justify-center">
+              <Image
+                src="/logo.png"
+                height={34}
+                width={34}
+                className="rounded-full"
+                alt="S3"
+              />{" "}
+              {/* Update with actual path and alt text */}
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-foreground">{COMPANY_CONFIG.name}</span>
-              <span className="text-xs text-muted-foreground hidden sm:block">PREMIUM DETAILING</span>
+              <span className="text-xl font-bold text-foreground">
+                {COMPANY_CONFIG.name}
+              </span>
+              <span className="text-xs text-muted-foreground hidden sm:block">
+                PREMIUM DETAILING
+              </span>
             </div>
           </div>
 
@@ -49,19 +61,21 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             {/* Language Switcher */}
             <button
-              onClick={() => setLanguage(language === 'ru' ? 'kz' : 'ru')}
+              onClick={() => setLanguage(language === "ru" ? "kz" : "ru")}
               className="flex items-center space-x-1 px-3 py-1 rounded-lg bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
             >
               <Globe className="w-4 h-4" />
-              <span className="text-sm font-medium">{language.toUpperCase()}</span>
+              <span className="text-sm font-medium">
+                {language.toUpperCase()}
+              </span>
             </button>
 
             {/* Theme Switcher */}
             <button
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
               className="p-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
             >
-              {theme === 'light' ? (
+              {theme === "light" ? (
                 <Moon className="w-4 h-4" />
               ) : (
                 <Sun className="w-4 h-4" />
@@ -101,5 +115,5 @@ export default function Header() {
         )}
       </div>
     </header>
-  )
+  );
 }

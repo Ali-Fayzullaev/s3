@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { useApp } from '../lib/context'
 import { COMPANY_CONFIG, getWhatsAppLink, getGoogleMapsLink, getDoubleGisLink } from '../lib/company-config'
+import Image from 'next/image'
 
 export default function Footer() {
   const { t, language } = useApp()
@@ -81,8 +82,8 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">S3</span>
+              <div className="flex items-center justify-center">
+                <Image src="/logo.png" height={34} width={34} className='rounded-full' alt="S3" /> {/* Update with actual path and alt text */}
               </div>
               <div>
                 <span className="text-xl font-bold text-card-foreground">{COMPANY_CONFIG.name}</span>
