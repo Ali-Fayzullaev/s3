@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { ArrowLeft, Clock, DollarSign, Shield, CheckCircle, Star } from 'lucide-react'
 import { getServiceById } from '../../../lib/services-data'
 import ServiceForm from '../../../components/ServiceForm'
-
+import Header from '../../../components/Header'
+import Footer from '../../../components/Footer';
 interface ServicePageProps {
   params: Promise<{ id: string }>
 }
@@ -18,9 +19,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background pt-20">
-      {/* Header */}
-      <div className="bg-muted/30 py-12">
+    <section>
+      <Header/>
+      <div className="min-h-screen bg-background mt-16">
+      <div className="bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-6">
             <Link 
@@ -135,19 +137,64 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 Галерея работ
               </h2>
               
-              <div className="grid md:grid-cols-2 gap-6">
-                {service.images.map((image, index) => (
-                  <div key={index} className="relative group">
-                    <Image
-                      src={image}
-                      alt={`${service.name.ru} - фото ${index + 1}`}
-                      width={400}
-                      height={300}
-                      className="rounded-xl object-cover w-full h-64 transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 rounded-xl transition-all duration-300" />
+              {/* 3D Carousel Gallery */}
+              <div className="gallery-container">
+                <div className="gallery-carousel">
+                  <div 
+                    className="carousel-face carousel-face-1" 
+                    style={{ backgroundImage: 'url(/ourWork/concierge_Full_Detail.jpg)' }}
+                  >
+                    <div className="carousel-debug">1</div>
                   </div>
-                ))}
+                  <div 
+                    className="carousel-face carousel-face-2" 
+                    style={{ backgroundImage: 'url(/ourWork/mirror_Finish_Polishing.jpg)' }}
+                  >
+                    <div className="carousel-debug">2</div>
+                  </div>
+                  <div 
+                    className="carousel-face carousel-face-3" 
+                    style={{ backgroundImage: 'url(/ourWork/interior_Ceramic_Coating.jpg)' }}
+                  >
+                    <div className="carousel-debug">3</div>
+                  </div>
+                  <div 
+                    className="carousel-face carousel-face-4" 
+                    style={{ backgroundImage: 'url(/ourWork/paint_Protection_Armor.jpg)' }}
+                  >
+                    <div className="carousel-debug">4</div>
+                  </div>
+                  <div 
+                    className="carousel-face carousel-face-5" 
+                    style={{ backgroundImage: 'url(/ourWork/cleaning.jpg)' }}
+                  >
+                    <div className="carousel-debug">5</div>
+                  </div>
+                  <div 
+                    className="carousel-face carousel-face-6" 
+                    style={{ backgroundImage: 'url(/ourWork/hand_Stitched_Steering_Wheel_Wrap.jpg)' }}
+                  >
+                    <div className="carousel-debug">6</div>
+                  </div>
+                  <div 
+                    className="carousel-face carousel-face-7" 
+                    style={{ backgroundImage: 'url(/ourWork/hybrid_Paint_Correction.jpg)' }}
+                  >
+                    <div className="carousel-debug">7</div>
+                  </div>
+                  <div 
+                    className="carousel-face carousel-face-8" 
+                    style={{ backgroundImage: 'url(/ourWork/premium_Sound_Deadening.jpg)' }}
+                  >
+                    <div className="carousel-debug">8</div>
+                  </div>
+                  <div 
+                    className="carousel-face carousel-face-9" 
+                    style={{ backgroundImage: 'url(/ourWork/tinting.jpg)' }}
+                  >
+                    <div className="carousel-debug">9</div>
+                  </div>
+                </div>
               </div>
             </section>
           </div>
@@ -159,42 +206,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 serviceName={service.name.ru}
                 serviceId={service.id}
               />
-
-              {/* Quick Info */}
-              <div className="mt-8 bg-muted/50 rounded-2xl p-6">
-                <h3 className="font-bold text-foreground mb-4">
-                  Дополнительная информация
-                </h3>
-                
-                <div className="space-y-4 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Время работы:</span>
-                    <span className="font-medium text-foreground">{service.duration}</span>
-                  </div>
-                  
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Стоимость:</span>
-                    <span className="font-medium text-foreground">{service.priceRange.ru}</span>
-                  </div>
-                  
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Гарантия:</span>
-                    <span className="font-medium text-foreground">{service.warranty.ru}</span>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-6 border-t border-border">
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                    <Shield className="w-4 h-4" />
-                    <span>Гарантия качества работ</span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+      <Footer/>
+    </section>
+    
   )
 }
 

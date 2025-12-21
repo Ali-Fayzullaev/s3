@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, Phone, User, Mail, Car, MessageCircle, Clock, Calendar, Loader } from 'lucide-react'
+import { Send, Phone, User, Car, Loader } from 'lucide-react'
 import { useApp } from '../lib/context'
-import { sendServiceRequest, sendQuoteRequest, ServiceMessage, QuoteRequest } from '../lib/api/whatsapp'
+import { sendServiceRequest, ServiceMessage } from '../lib/api/whatsapp'
 
 interface ServiceFormProps {
   serviceName: string
@@ -14,20 +14,14 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
   const { t } = useApp()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
-  const [formType, setFormType] = useState<'service' | 'quote'>('service')
 
   const [formData, setFormData] = useState({
     clientName: '',
     clientPhone: '',
-    clientEmail: '',
-    carModel: '',
-    message: '',
-    serviceType: '',
-    preferredDate: '',
-    preferredTime: ''
+    carModel: ''
   })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -43,36 +37,17 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
         serviceName,
         clientName: formData.clientName,
         clientPhone: formData.clientPhone,
-        clientEmail: formData.clientEmail || undefined,
-        carModel: formData.carModel || undefined,
-        message: formData.message
+        carModel: formData.carModel || undefined
       }
 
-      let success = false
-
-      if (formType === 'quote') {
-        const quoteData: QuoteRequest = {
-          ...baseData,
-          serviceType: formData.serviceType,
-          preferredDate: formData.preferredDate || undefined,
-          preferredTime: formData.preferredTime || undefined
-        }
-        success = await sendQuoteRequest(quoteData)
-      } else {
-        success = await sendServiceRequest(baseData)
-      }
+      const success = await sendServiceRequest(baseData)
 
       if (success) {
         setShowSuccess(true)
         setFormData({
           clientName: '',
           clientPhone: '',
-          clientEmail: '',
-          carModel: '',
-          message: '',
-          serviceType: '',
-          preferredDate: '',
-          preferredTime: ''
+          carModel: ''
         })
         setTimeout(() => setShowSuccess(false), 5000)
       } else {
@@ -107,34 +82,8 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
   return (
     <div className="bg-card rounded-2xl p-8 shadow-xl border">
       <h3 className="text-2xl font-bold text-card-foreground mb-6">
-        Оставить заявку на услугу
+        Заказать услугу
       </h3>
-
-      {/* Form Type Toggle */}
-      <div className="flex bg-muted rounded-lg p-1 mb-6">
-        <button
-          type="button"
-          onClick={() => setFormType('service')}
-          className={`flex-1 py-2 px-4 rounded-md font-medium transition-all ${
-            formType === 'service'
-              ? 'bg-primary text-primary-foreground shadow-sm'
-              : 'text-muted-foreground hover:text-foreground'
-          }`}
-        >
-          Заказать услугу
-        </button>
-        <button
-          type="button"
-          onClick={() => setFormType('quote')}
-          className={`flex-1 py-2 px-4 rounded-md font-medium transition-all ${
-            formType === 'quote'
-              ? 'bg-primary text-primary-foreground shadow-sm'
-              : 'text-muted-foreground hover:text-foreground'
-          }`}
-        >
-          Узнать стоимость
-        </button>
-      </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Client Name */}
@@ -171,22 +120,6 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
           />
         </div>
 
-        {/* Email */}
-        <div>
-          <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
-            <Mail className="w-4 h-4 mr-2" />
-            Email (необязательно)
-          </label>
-          <input
-            type="email"
-            name="clientEmail"
-            value={formData.clientEmail}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-            placeholder="your@email.com"
-          />
-        </div>
-
         {/* Car Model */}
         <div>
           <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
@@ -200,85 +133,6 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
             onChange={handleInputChange}
             className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
             placeholder="Toyota Camry 2020"
-          />
-        </div>
-
-        {/* Service Type for Quote */}
-        {formType === 'quote' && (
-          <div>
-            <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Тип услуги *
-            </label>
-            <select
-              name="serviceType"
-              value={formData.serviceType}
-              onChange={handleInputChange}
-              required
-              className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-            >
-              <option value="">Выберите тип услуги</option>
-              <option value="basic">Базовый пакет</option>
-              <option value="premium">Премиум пакет</option>
-              <option value="full">Полный пакет</option>
-              <option value="custom">Индивидуальный</option>
-            </select>
-          </div>
-        )}
-
-        {/* Preferred Date and Time for Quote */}
-        {formType === 'quote' && (
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
-                <Calendar className="w-4 h-4 mr-2" />
-                Предпочтительная дата
-              </label>
-              <input
-                type="date"
-                name="preferredDate"
-                value={formData.preferredDate}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-              />
-            </div>
-            <div>
-              <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
-                <Clock className="w-4 h-4 mr-2" />
-                Предпочтительное время
-              </label>
-              <select
-                name="preferredTime"
-                value={formData.preferredTime}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-              >
-                <option value="">Выберите время</option>
-                <option value="9:00-12:00">9:00 - 12:00</option>
-                <option value="12:00-15:00">12:00 - 15:00</option>
-                <option value="15:00-18:00">15:00 - 18:00</option>
-              </select>
-            </div>
-          </div>
-        )}
-
-        {/* Message */}
-        <div>
-          <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
-            <MessageCircle className="w-4 h-4 mr-2" />
-            {formType === 'quote' ? 'Дополнительная информация' : 'Ваше сообщение *'}
-          </label>
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleInputChange}
-            required={formType === 'service'}
-            rows={4}
-            className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
-            placeholder={formType === 'quote' 
-              ? "Расскажите о ваших пожеланиях..." 
-              : "Опишите что вас интересует..."
-            }
           />
         </div>
 
@@ -296,7 +150,7 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
           ) : (
             <>
               <Send className="w-5 h-5 mr-2" />
-              {formType === 'quote' ? 'Узнать стоимость' : 'Отправить заявку'}
+              Заказать услугу
             </>
           )}
         </button>

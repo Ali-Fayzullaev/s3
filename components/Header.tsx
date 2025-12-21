@@ -11,7 +11,7 @@ export default function Header() {
   const { language, setLanguage, theme, setTheme, t } = useApp();
 
   const navigation = [
-    { name: t("home"), href: "#home" },
+    { name: t("home"), href: "/" },
     { name: t("services"), href: "#services" },
     { name: t("about"), href: "#about" },
     { name: t("faq"), href: "#faq" },

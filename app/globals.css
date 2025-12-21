@@ -145,3 +145,90 @@ html {
 .bb {
   border: 2px solid red;
 }
+
+/* 3D Gallery Carousel Styles */
+.gallery-container {
+  position: relative;
+  width: 320px;
+  height: 250px;
+  margin: 50px auto;
+  perspective: 1000px;
+}
+
+.gallery-carousel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: rotate360 60s infinite linear;
+}
+
+.carousel-face {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  top: 25px;
+  left: 50%;
+  transform-origin: center center;
+  margin-left: -150px; /* Центрируем по горизонтали */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-debug {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.carousel-face-1 { transform: translateX(-150px) rotateY(0deg) translateZ(430px); }
+.carousel-face-2 { transform: translateX(-150px) rotateY(40deg) translateZ(430px); }
+.carousel-face-3 { transform: translateX(-150px) rotateY(80deg) translateZ(430px); }
+.carousel-face-4 { transform: translateX(-150px) rotateY(120deg) translateZ(430px); }
+.carousel-face-5 { transform: translateX(-150px) rotateY(160deg) translateZ(430px); }
+.carousel-face-6 { transform: translateX(-150px) rotateY(200deg) translateZ(430px); }
+.carousel-face-7 { transform: translateX(-150px) rotateY(240deg) translateZ(430px); }
+.carousel-face-8 { transform: translateX(-150px) rotateY(280deg) translateZ(430px); }
+.carousel-face-9 { transform: translateX(-150px) rotateY(320deg) translateZ(430px); }
+
+@keyframes rotate360 {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(-360deg); }
+}
+
+/* Mobile responsiveness for 3D carousel */
+@media (max-width: 768px) {
+  .gallery-container {
+    width: 280px;
+    height: 220px;
+  }
+  
+  .carousel-face {
+    width: 260px;
+    height: 170px;
+    margin-left: -130px; /* Центрируем для меньшего размера */
+  }
+  
+  .carousel-face-1 { transform: translateX(-130px) rotateY(0deg) translateZ(380px); }
+  .carousel-face-2 { transform: translateX(-130px) rotateY(40deg) translateZ(380px); }
+  .carousel-face-3 { transform: translateX(-130px) rotateY(80deg) translateZ(380px); }
+  .carousel-face-4 { transform: translateX(-130px) rotateY(120deg) translateZ(380px); }
+  .carousel-face-5 { transform: translateX(-130px) rotateY(160deg) translateZ(380px); }
+  .carousel-face-6 { transform: translateX(-130px) rotateY(200deg) translateZ(380px); }
+  .carousel-face-7 { transform: translateX(-130px) rotateY(240deg) translateZ(380px); }
+  .carousel-face-8 { transform: translateX(-130px) rotateY(280deg) translateZ(380px); }
+  .carousel-face-9 { transform: translateX(-130px) rotateY(320deg) translateZ(380px); }
+}
