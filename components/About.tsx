@@ -88,119 +88,22 @@ export default function About() {
           </div>
 
           {/* Visual Gallery */}
-          <div className="relative">
-            {/* Main Gallery Grid */}
-            <div className="grid grid-cols-6 gap-4 h-96">
-              {/* Большое изображение слева */}
-              <div 
-                className="col-span-4 row-span-2 relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-[1.02]"
-                onClick={() => setSelectedImage(galleryImages[0].src)}
-              >
+          <div className="relative flex justify-center items-center">
+            {/* Animated Gallery */}
+            <div className="gallery">
+              {galleryImages.slice(0, 5).map((image, index) => (
                 <img 
-                  src={galleryImages[0].src}
-                  alt={galleryImages[0].alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4 bg-primary/90 backdrop-blur-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-white text-sm font-medium">{galleryImages[0].category}</span>
-                </div>
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                {/* View Icon */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="bg-primary/90 backdrop-blur-sm p-3 rounded-full">
-                    <Eye className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-                
-                {/* Image Title */}
-                <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h3 className="text-lg font-bold mb-1">{galleryImages[0].alt}</h3>
-                  <p className="text-sm opacity-90">Премиум детейлинг услуги</p>
-                </div>
-              </div>
-
-              {/* Правая колонка - 4 средних изображения */}
-              <div className="col-span-2 grid grid-rows-4 gap-4">
-                {galleryImages.slice(1, 5).map((image, index) => (
-                  <div 
-                    key={index + 1}
-                    className="relative group cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                    onClick={() => setSelectedImage(image.src)}
-                  >
-                    <img 
-                      src={image.src}
-                      alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    
-                    {/* Category Badge */}
-                    <div className="absolute top-2 left-2 bg-primary/90 backdrop-blur-sm px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="text-white text-xs font-medium">{image.category}</span>
-                    </div>
-                    
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* View Icon */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-primary/90 backdrop-blur-sm p-2 rounded-full">
-                        <Eye className="w-4 h-4 text-white" />
-                      </div>
-                    </div>
-                    
-                    {/* Image Title */}
-                    <div className="absolute bottom-2 left-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <p className="text-xs font-semibold truncate">{image.alt}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Нижний ряд - 4 одинаковых изображения */}
-            <div className="grid grid-cols-4 gap-4 mt-4">
-              {galleryImages.slice(5, 9).map((image, index) => (
-                <div 
-                  key={index + 5}
-                  className="relative group cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 h-32"
+                  key={index}
+                  src={image.src}
+                  alt={image.alt}
+                  className="gallery-image cursor-pointer"
                   onClick={() => setSelectedImage(image.src)}
-                >
-                  <img 
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  
-                  {/* Category Badge */}
-                  <div className="absolute top-2 left-2 bg-primary/90 backdrop-blur-sm px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-white text-xs font-medium">{image.category}</span>
-                  </div>
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* View Icon */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="bg-primary/90 backdrop-blur-sm p-2 rounded-full">
-                      <Eye className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                  
-                  {/* Image Title */}
-                  <div className="absolute bottom-2 left-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-xs font-semibold truncate">{image.alt}</p>
-                  </div>
-                </div>
+                />
               ))}
             </div>
             
             {/* See More Button */}
-            <div className="text-center mt-6">
+            <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
               <Link href="/about">
                 <button className="inline-flex items-center px-6 py-3 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl font-medium transition-all duration-200 transform hover:scale-105">
                   <Eye className="w-4 h-4 mr-2" />
@@ -226,6 +129,90 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {/* Gallery Styles */}
+      <style jsx>{`
+        .gallery {
+          --d: 8s; /* duration */
+          display: grid;
+          width: 280px;
+          height: 280px;
+          margin: 40px auto;
+        }
+
+        .gallery-image {
+          grid-area: 1/1;
+          width: 100%;
+          height: 100%;
+          aspect-ratio: 1;
+          object-fit: cover;
+          border: 8px solid hsl(var(--card));
+          border-radius: 16px;
+          box-shadow: 0 8px 32px rgba(220, 38, 38, 0.2), 0 4px 16px rgba(0, 0, 0, 0.1);
+          z-index: 2;
+          animation: 
+            slide var(--d) infinite,
+            z-order var(--d) infinite steps(1);
+          transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+          transform: scale(1.05) !important;
+        }
+
+        .gallery-image:last-child {
+          animation-name: slide, z-order-last;
+        }
+
+        /* Individual delays and rotations */
+        .gallery-image:nth-child(1) {
+          animation-delay: calc(-4/5*var(--d));
+          --r: -15deg;
+        }
+
+        .gallery-image:nth-child(2) {
+          animation-delay: calc(-3/5*var(--d));
+          --r: 8deg;
+        }
+
+        .gallery-image:nth-child(3) {
+          animation-delay: calc(-2/5*var(--d));
+          --r: -12deg;
+        }
+
+        .gallery-image:nth-child(4) {
+          animation-delay: calc(-1/5*var(--d));
+          --r: 18deg;
+        }
+
+        .gallery-image:nth-child(5) {
+          animation-delay: calc(0/5*var(--d));
+          --r: -8deg;
+        }
+
+        @keyframes slide {
+          10% { transform: translateX(120%) rotate(var(--r)); }
+          0%, 100%, 20% { transform: translateX(0%) rotate(var(--r)); }
+        }
+
+        @keyframes z-order {
+          10%, 20% { z-index: 1; }
+          80% { z-index: 2; }
+        }
+
+        @keyframes z-order-last {
+          10%, 20% { z-index: 1; }
+          90% { z-index: 2; }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+          .gallery {
+            width: 220px;
+            height: 220px;
+          }
+        }
+      `}</style>
 
       {/* Modal for Image Preview */}
       {selectedImage && (
