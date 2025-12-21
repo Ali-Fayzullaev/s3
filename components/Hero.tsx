@@ -54,7 +54,7 @@ export default function Hero() {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-md text-white text-sm font-medium mb-8 fade-in-up border border-white/20 shadow-xl">
               <span className="w-2 h-2 bg-primary rounded-full mr-3 animate-pulse"></span>
-              <span>{COMPANY_CONFIG.name} - Премиум детейлинг</span>
+              <span>{COMPANY_CONFIG.name} - {t('premiumDetailing')}</span>
             </div>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-white mb-6 md:mb-8 leading-tight slide-in-left">
@@ -64,7 +64,7 @@ export default function Hero() {
             </h1>
             
             <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 mb-8 md:mb-10 max-w-2xl fade-in-up leading-relaxed font-light">
-              {COMPANY_CONFIG.description}
+              {t('heroSubtitle')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start fade-in-up">
@@ -102,15 +102,15 @@ export default function Hero() {
             <div className="grid grid-cols-3 gap-4 md:gap-8 mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/20 fade-in-up">
               <div className="text-center group">
                 <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">1000+</div>
-                <div className="text-xs md:text-sm text-white/80 font-medium">Довольных клиентов</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium">{t('satisfiedClients')}</div>
               </div>
               <div className="text-center group">
                 <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">5+</div>
-                <div className="text-xs md:text-sm text-white/80 font-medium">Лет опыта</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium">{t('yearsOfExperience')}</div>
               </div>
               <div className="text-center group">
                 <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-xl mb-1 md:mb-2 group-hover:text-primary transition-colors duration-300">10</div>
-                <div className="text-xs md:text-sm text-white/80 font-medium">Видов услуг</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium">{t('typesOfServices')}</div>
               </div>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function Hero() {
       {/* Professional Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30">
         <div className="flex flex-col items-center space-y-2">
-          <div className="text-white/60 text-xs font-medium tracking-wider">ПРОКРУТИТЕ ВНИЗ</div>
+          <div className="text-white/60 text-xs font-medium tracking-wider">{t('scrollDown')}</div>
           <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center backdrop-blur-sm">
             <div className="w-1 h-3 bg-white/80 rounded-full animate-bounce mt-2" />
           </div>

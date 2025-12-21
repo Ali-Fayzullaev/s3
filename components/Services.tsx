@@ -130,20 +130,23 @@ export default function Services() {
     <>
       <section id="services" className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
+          {/* Header Section */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-              <Palette className="w-4 h-4 mr-2" />
-              <span>Наши специализации</span>
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+              <span className="w-2 h-2 bg-primary rounded-full mr-3 animate-pulse"></span>
+              {t('premiumDetailing')}
             </div>
             
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              {t('servicesTitle')}
+            <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 leading-tight">
+              {t('professionalServices')}{' '}
+              <span className="text-primary">{t('forYourCar')}</span>
             </h2>
             
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('servicesSubtitle')}
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              {t('servicesDescription')}
             </p>
+            
+            <div className="w-32 h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-8 rounded-full"></div>
           </div>
 
           {/* Services Grid */}
@@ -190,14 +193,14 @@ export default function Services() {
                         href={`/services/${service.id}`}
                         className="flex-1 bg-primary/5 hover:bg-primary hover:text-primary-foreground text-primary py-3 rounded-xl font-medium transition-all duration-300 group-hover:shadow-lg flex items-center justify-center"
                       >
-                        Подробнее
+                        {t('learnMore')}
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </Link>
                       <button 
                         onClick={() => openModal(service.title, service.id)}
                         className="px-4 py-3 bg-secondary hover:bg-accent text-secondary-foreground rounded-xl font-medium transition-all duration-300"
                       >
-                        Заказать
+                        {t('orderService')}
                       </button>
                     </div>
                   </div>

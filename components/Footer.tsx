@@ -14,6 +14,7 @@ import {
 import { useApp } from '../lib/context'
 import { COMPANY_CONFIG, getWhatsAppLink, getGoogleMapsLink, getDoubleGisLink } from '../lib/company-config'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Footer() {
   const { t, language } = useApp()
@@ -181,42 +182,66 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Services & Navigation */}
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-card-foreground mb-6">
-              Наши услуги
-            </h3>
-            <ul className="space-y-3 mb-8">
-              {services.map((service, index) => (
-                <li key={index}>
-                  <a 
-                    href="#services"
-                    className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    {service}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <h4 className="text-sm font-semibold text-card-foreground mb-3">
-              Навигация
-            </h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-foreground mb-4">{t('quickLinks')}</h4>
+            <ul className="space-y-2">
               <li>
-                <a href="#home" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                <a href="#home" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('home')}
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('services')}
+                </a>
+              </li>
+              <li>
+                <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('about')}
                 </a>
               </li>
               <li>
-                <a href="#faq" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                <a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('faq')}
                 </a>
+              </li>
+              <li>
+                <a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('contact')}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Services Column */}
+          <div>
+            <h4 className="font-semibold text-foreground mb-4">{t('ourServices')}</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/services/tinting" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('tinting')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/ppf" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('ppf')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/detailing" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('detailing')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/ceramic" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('ceramic')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/polishing" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('polishing')}
+                </Link>
               </li>
             </ul>
           </div>

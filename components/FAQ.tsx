@@ -42,20 +42,22 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-20 bg-muted/30">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-            <HelpCircle className="w-4 h-4 mr-2" />
-            <span>Ответы на вопросы</span>
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+            <span className="w-2 h-2 bg-primary rounded-full mr-3 animate-pulse"></span>
+            {t('faqTitle')}
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 leading-tight">
             {t('faqTitle')}
           </h2>
           
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Ответы на самые популярные вопросы о наших услугах детейлинга
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            {t('faqSubtitle')}
           </p>
+          
+          <div className="w-32 h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-8 rounded-full"></div>
         </div>
 
         {/* FAQ Items */}

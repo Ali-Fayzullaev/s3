@@ -82,7 +82,7 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
   return (
     <div className="bg-card rounded-2xl p-8 shadow-xl border">
       <h3 className="text-2xl font-bold text-card-foreground mb-6">
-        Заказать услугу
+        {t('orderServiceTitle')}
       </h3>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -90,7 +90,7 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
         <div>
           <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
             <User className="w-4 h-4 mr-2" />
-            Ваше имя *
+            {t('yourName')} *
           </label>
           <input
             type="text"
@@ -99,7 +99,7 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
             onChange={handleInputChange}
             required
             className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-            placeholder="Введите ваше имя"
+            placeholder={t('enterName')}
           />
         </div>
 
@@ -107,7 +107,7 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
         <div>
           <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
             <Phone className="w-4 h-4 mr-2" />
-            Номер телефона *
+            {t('phoneNumber')} *
           </label>
           <input
             type="tel"
@@ -124,7 +124,7 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
         <div>
           <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
             <Car className="w-4 h-4 mr-2" />
-            Модель автомобиля (необязательно)
+            {t('carModelOptional')}
           </label>
           <input
             type="text"
@@ -132,7 +132,7 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
             value={formData.carModel}
             onChange={handleInputChange}
             className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-            placeholder="Toyota Camry 2020"
+            placeholder={t('carModelPlaceholder')}
           />
         </div>
 
@@ -145,18 +145,18 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
           {isSubmitting ? (
             <>
               <Loader className="w-5 h-5 mr-2 animate-spin" />
-              Отправка...
+              {t('sendRequest')}...
             </>
           ) : (
             <>
               <Send className="w-5 h-5 mr-2" />
-              Заказать услугу
+              {t('sendRequest')}
             </>
           )}
         </button>
 
         <p className="text-xs text-muted-foreground text-center">
-          Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
+          {t('agreeToProcessing')}
         </p>
       </form>
     </div>

@@ -12,23 +12,23 @@ export default function About() {
   const features = [
     {
       icon: Award,
-      title: 'Премиум качество',
-      description: 'Используем только лучшие материалы и оборудование'
+      title: t('premiumQuality'),
+      description: t('premiumQualityDesc')
     },
     {
       icon: Users,
-      title: 'Опытная команда',
-      description: 'Сертифицированные мастера с многолетним опытом'
+      title: t('experiencedTeam'),
+      description: t('experiencedTeamDesc')
     },
     {
       icon: Clock,
-      title: 'Быстрый сервис',
-      description: 'Выполняем работы в оговоренные сроки'
+      title: t('fastService'),
+      description: t('fastServiceDesc')
     },
     {
       icon: Shield,
-      title: 'Гарантия качества',
-      description: 'Предоставляем гарантию на все виды работ'
+      title: t('qualityGuarantee'),
+      description: t('qualityGuaranteeDesc')
     }
   ]
 
@@ -52,7 +52,7 @@ export default function About() {
           <div>
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
               <Users className="w-4 h-4 mr-2" />
-              <span>Наша история</span>
+              <span>{t('ourHistory')}</span>
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
@@ -82,7 +82,7 @@ export default function About() {
 
             <Link href="/about">
             <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
-              Узнать больше о нас
+              {t('learnMoreAboutUs')}
             </button>
             </Link>
           </div>

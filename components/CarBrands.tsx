@@ -40,17 +40,16 @@ export default function CarBrands() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-6 py-3 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-primary rounded-full mr-3 animate-pulse"></span>
-            АВТОМОБИЛЬНЫЕ БРЕНДЫ
+            {t('automotiveBrands')}
           </div>
           
           <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 leading-tight">
-            Работаем с автомобилями{' '}
-            <span className="text-primary">всех марок</span>
+            {t('workWithAllBrands')}{' '}
+            <span className="text-primary">{t('allBrands')}</span>
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-12">
-            Наши мастера имеют опыт работы с автомобилями любых марок и моделей. 
-            От бюджетных авто до премиальных суперкаров - мы знаем особенности каждого бренда.
+            {t('ourMasters')}
           </p>
         </div>
         
@@ -170,28 +169,28 @@ export default function CarBrands() {
           <div className="inline-flex items-center justify-center p-8 bg-card border border-border rounded-2xl shadow-lg mb-8">
             <div className="text-center">
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                И многие другие марки автомобилей
+                {t('otherBrands')}
               </h3>
               <div className="flex flex-wrap justify-center gap-6 text-sm">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
-                  <span className="text-muted-foreground font-medium">Европейские марки</span>
+                  <span className="text-muted-foreground font-medium">{t('europeanBrands')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-primary rounded-full animate-pulse delay-200"></div>
-                  <span className="text-muted-foreground font-medium">Американские марки</span>
+                  <span className="text-muted-foreground font-medium">{t('americanBrands')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-primary rounded-full animate-pulse delay-500"></div>
-                  <span className="text-muted-foreground font-medium">Азиатские марки</span>
+                  <span className="text-muted-foreground font-medium">{t('asianBrands')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-primary rounded-full animate-pulse delay-700"></div>
-                  <span className="text-muted-foreground font-medium">Премиум сегмент</span>
+                  <span className="text-muted-foreground font-medium">{t('premiumSegment')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-primary rounded-full animate-pulse delay-1000"></div>
-                  <span className="text-muted-foreground font-medium">Электромобили</span>
+                  <span className="text-muted-foreground font-medium">{t('electricVehicles')}</span>
                 </div>
               </div>
             </div>
@@ -200,7 +199,7 @@ export default function CarBrands() {
           {/* Call to Action */}
           <div className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground p-6 rounded-2xl">
             <p className="text-lg font-semibold">
-              🚗 Ваш автомобиль заслуживает лучшего ухода независимо от марки!
+              {t('yourCarDeserves')}
             </p>
           </div>
         </div>

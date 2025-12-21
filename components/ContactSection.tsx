@@ -69,20 +69,22 @@ export default function ContactSection() {
     <>
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
+          {/* Header Section */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-              <MapPin className="w-4 h-4 mr-2" />
-              <span>Найдите нас</span>
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+              <span className="w-2 h-2 bg-primary rounded-full mr-3 animate-pulse"></span>
+              {t('getInTouch')}
             </div>
             
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 leading-tight">
               {t('contactTitle')}
             </h2>
             
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Свяжитесь с нами удобным способом или посетите наш детейлинг-центр в Шымкент
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              {t('contactSubtitle')}
             </p>
+            
+            <div className="w-32 h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-8 rounded-full"></div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
@@ -401,6 +403,35 @@ export default function ContactSection() {
           </div>
         </div>
       )}
+
+      <div className="text-center">
+        <h3 className="text-2xl font-bold text-card-foreground mb-6">
+          {t('readyToStart')}
+        </h3>
+        <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+          {t('contactForConsultation')}
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={getWhatsAppLink('Здравствуйте! Хочу получить консультацию по детейлингу автомобиля.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105"
+          >
+            <Send className="w-5 h-5 mr-2" />
+            {t('sendMessage')}
+          </a>
+          
+          <a
+            href={`tel:${COMPANY_CONFIG.contacts.phone.formatted}`}
+            className="inline-flex items-center px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all duration-300 transform hover:scale-105"
+          >
+            <Phone className="w-5 h-5 mr-2" />
+            {t('callUs')}
+          </a>
+        </div>
+      </div>
     </>
   )
 }
