@@ -22,14 +22,14 @@ export default function Footer() {
   const contactInfo = [
     {
       icon: Phone,
-      title: 'Основной телефон',
+      title: language === 'ru' ? 'Основной телефон' : 'Негізгі телефон',
       info: COMPANY_CONFIG.contacts.phone.main,
       link: `tel:${COMPANY_CONFIG.contacts.phone.formatted}`
     },
     {
       icon: MapPin,
       title: t('address'),
-      info: COMPANY_CONFIG.contacts.address.full,
+      info: COMPANY_CONFIG.contacts.address.full[language],
       link: getGoogleMapsLink()
     },
   ]
@@ -93,7 +93,7 @@ export default function Footer() {
             </div>
             
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              {COMPANY_CONFIG.description}
+              {COMPANY_CONFIG.description[language]}
             </p>
 
             {/* Social Links */}
@@ -117,13 +117,13 @@ export default function Footer() {
 
             {/* WhatsApp Quick Contact */}
             <a
-              href={getWhatsAppLink('Здравствуйте! Интересует детейлинг автомобиля.')}
+              href={getWhatsAppLink(language === 'ru' ? 'Здравствуйте! Интересует детейлинг автомобиля.' : 'Сәлеметсіз бе! Автомобиль детейлингі қызықтырады.')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors duration-300"
             >
               <Send className="w-4 h-4 mr-2" />
-              Написать в WhatsApp
+              {language === 'ru' ? 'Написать в WhatsApp' : 'WhatsApp-қа жазу'}
             </a>
           </div>
 
@@ -167,7 +167,7 @@ export default function Footer() {
 
             {/* Additional Phones */}
             <div className="border-t border-border pt-4">
-              <h4 className="text-sm font-medium text-card-foreground mb-3">Дополнительные номера</h4>
+              <h4 className="text-sm font-medium text-card-foreground mb-3">{language === 'ru' ? 'Дополнительные номера' : 'Қосымша нөмірлер'}</h4>
               <div className="space-y-2">
                 {additionalPhones.map((phone, index) => (
                   <a
@@ -249,15 +249,15 @@ export default function Footer() {
           {/* Location & Maps */}
           <div>
             <h3 className="text-lg font-semibold text-card-foreground mb-6">
-              Как нас найти
+              {language === 'ru' ? 'Как нас найти' : 'Бізді қалай табуға болады'}
             </h3>
             
             <div className="bg-muted/50 rounded-xl p-4 mb-6">
               <div className="text-sm font-medium text-card-foreground mb-2">
-                📍 Наш адрес
+                📍 {language === 'ru' ? 'Наш адрес' : 'Біздің мекен-жайымыз'}
               </div>
               <div className="text-sm text-muted-foreground mb-4">
-                {COMPANY_CONFIG.contacts.address.full}
+                {COMPANY_CONFIG.contacts.address.full[language]}
               </div>
               
               <div className="space-y-3">
@@ -286,14 +286,14 @@ export default function Footer() {
         <div className="border-t border-border mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-muted-foreground">
-              © 2025 {COMPANY_CONFIG.name}. Все права защищены.
+              © {new Date().getFullYear()} {COMPANY_CONFIG.name}. {language === 'ru' ? 'Все права защищены.' : 'Барлық құқықтар қорғалған.'}
             </div>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors duration-200">
-                Политика конфиденциальности
+                {language === 'ru' ? 'Политика конфиденциальности' : 'Құпиялылық саясаты'}
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors duration-200">
-                Условия использования
+                {language === 'ru' ? 'Условия использования' : 'Пайдалану шарттары'}
               </a>
             </div>
           </div>

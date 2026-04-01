@@ -20,13 +20,13 @@ import {
   Play
 } from 'lucide-react'
 import { useApp } from '../../lib/context'
-import { COMPANY_CONFIG } from '../../lib/company-config'
+import { COMPANY_CONFIG, getWhatsAppLink } from '../../lib/company-config'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Image from 'next/image'
 
 export default function AboutPage() {
-  const { t } = useApp()
+  const { t, language } = useApp()
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const galleryImages = [
@@ -146,7 +146,7 @@ export default function AboutPage() {
               {/* Text Content */}
               <div className="space-y-6">
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  Наша история
+                  {language === 'ru' ? 'Наша история' : 'Біздің тарихымыз'}
                 </h2>
                 
                 <p className="text-muted-foreground leading-relaxed">
@@ -161,11 +161,11 @@ export default function AboutPage() {
                 <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border">
                   <div className="text-center p-4">
                     <div className="text-2xl font-bold text-primary mb-1">1000+</div>
-                    <div className="text-sm text-muted-foreground">Обслуженных авто</div>
+                    <div className="text-sm text-muted-foreground">{language === 'ru' ? 'Обслуженных авто' : 'Қызмет көрсетілген авто'}</div>
                   </div>
                   <div className="text-center p-4">
                     <div className="text-2xl font-bold text-primary mb-1">5+</div>
-                    <div className="text-sm text-muted-foreground">Лет опыта</div>
+                    <div className="text-sm text-muted-foreground">{language === 'ru' ? 'Лет опыта' : 'Жыл тәжірибе'}</div>
                   </div>
                 </div>
               </div>
@@ -187,7 +187,7 @@ export default function AboutPage() {
                 <div className="absolute -bottom-6 -right-6 bg-card rounded-xl p-4 shadow-lg border border-border">
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary mb-1">98%</div>
-                    <div className="text-xs text-muted-foreground">Довольных клиентов</div>
+                    <div className="text-xs text-muted-foreground">{language === 'ru' ? 'Довольных клиентов' : 'Қанағаттанған клиенттер'}</div>
                   </div>
                 </div>
               </div>
@@ -203,7 +203,7 @@ export default function AboutPage() {
                 {t('ourPrinciples')}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Наши основные ценности, которые определяют качество наших услуг
+                {language === 'ru' ? 'Наши основные ценности, которые определяют качество наших услуг' : 'Біздің қызметтеріміздің сапасын анықтайтын негізгі құндылықтарымыз'}
               </p>
             </div>
             
@@ -236,7 +236,7 @@ export default function AboutPage() {
                 {t('ourTeam')}
               </h2>
               <p className="text-muted-foreground">
-                Профессиональные мастера с многолетним опытом
+                {language === 'ru' ? 'Профессиональные мастера с многолетним опытом' : 'Көпжылдық тәжірибесі бар кәсіби шеберлер'}
               </p>
             </div>
             
@@ -273,10 +273,10 @@ export default function AboutPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                Портфолио наших работ
+                {language === 'ru' ? 'Портфолио наших работ' : 'Біздің жұмыстарымыздың портфолиосы'}
               </h2>
               <p className="text-muted-foreground">
-                Примеры выполненных проектов по различным видам детейлинга
+                {language === 'ru' ? 'Примеры выполненных проектов по различным видам детейлинга' : 'Детейлингтің әртүрлі түрлері бойынша орындалған жобалардың мысалдары'}
               </p>
             </div>
 
@@ -363,7 +363,7 @@ export default function AboutPage() {
                 {t('callUs')}
               </a>
               <a 
-                href={`https://wa.me/${COMPANY_CONFIG.contacts.phone.formatted.replace(/[^\d]/g, '')}?text=Здравствуйте! Интересуют услуги детейлинга.`}
+                href={getWhatsAppLink(language === 'ru' ? 'Здравствуйте! Интересуют услуги детейлинга.' : 'Сәлеметсіз бе! Детейлинг қызметтеріне қызығушылық танытамын.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 border border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-lg font-medium transition-colors duration-300"

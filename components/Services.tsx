@@ -17,10 +17,11 @@ import {
   ArrowRight
 } from 'lucide-react'
 import { useApp } from '../lib/context'
+import { getWhatsAppConsultLink } from '../lib/company-config'
 import ServiceModal from './ServiceModal'
 
 export default function Services() {
-  const { t } = useApp()
+  const { t, language } = useApp()
   const [modalState, setModalState] = useState({
     isOpen: false,
     serviceName: '',
@@ -216,13 +217,18 @@ export default function Services() {
           <div className="text-center mt-16">
             <div className="bg-card rounded-2xl p-8 shadow-lg">
               <h3 className="text-2xl font-bold text-card-foreground mb-4">
-                Не знаете, какую услугу выбрать?
+                {language === 'ru' ? 'Не знаете, какую услугу выбрать?' : 'Қай қызметті таңдау керектігін білмейсіз бе?'}
               </h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Наши специалисты помогут подобрать оптимальный пакет услуг для вашего автомобиля
+                {language === 'ru'
+                  ? 'Наши специалисты помогут подобрать оптимальный пакет услуг для вашего автомобиля'
+                  : 'Біздің мамандар сіздің автомобіліңіз үшін оңтайлы қызмет пакетін таңдауға көмектеседі'}
               </p>
-              <button onClick={() => openModal('', '')} className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
-                Получить консультацию
+              <button
+                onClick={() => window.open(getWhatsAppConsultLink(language), '_blank')}
+                className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105"
+              >
+                {language === 'ru' ? 'Получить консультацию' : 'Кеңес алу'}
               </button>
             </div>
           </div>

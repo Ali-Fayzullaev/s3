@@ -1,25 +1,47 @@
 'use client'
 
 import { ArrowRight, Play, MessageCircle } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useApp } from '../lib/context'
-import { COMPANY_CONFIG } from '../lib/company-config'
+import { COMPANY_CONFIG, getWhatsAppLink } from '../lib/company-config'
 import QuoteModal from './QuoteModal'
 import VideoModal from './VideoModal'
 
 export default function Hero() {
-  const { t, theme } = useApp()
+  const { t, theme, language } = useApp()
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false)
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   // Выбираем фоновое изображение в зависимости от темы
   const backgroundImage = theme === 'dark' ? '/fon_dark_hero.jpg' : '/fon_light_hero.jpg'
 
+  // Принудительный запуск видео на десктопе
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      video.muted = true
+      video.playsInline = true
+      const playPromise = video.play()
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay blocked — retry on interaction
+          const tryPlay = () => {
+            video.play().catch(() => {})
+            document.removeEventListener('click', tryPlay)
+          }
+          document.addEventListener('click', tryPlay)
+        })
+      }
+    }
+  }, [])
+
   const handleWhatsAppClick = () => {
-    const phoneNumber = '+77777777777' // Замените на ваш номер WhatsApp
-    const message = 'Здравствуйте! Интересуюсь услугами детейлинга'
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, '_blank')
+    const messages = {
+      ru: 'Здравствуйте! Интересуюсь услугами детейлинга.',
+      kz: 'Сәлеметсіз бе! Детейлинг қызметтеріне қызығушылық танытамын.',
+    }
+    window.open(getWhatsAppLink(messages[language]), '_blank')
   }
 
   return (
@@ -122,15 +144,13 @@ export default function Hero() {
               <div className="relative w-full h-[350px] lg:h-[400px] bg-black/20 backdrop-blur-xl rounded-2xl overflow-hidden transform group-hover:scale-105 transition-all duration-700 border border-white/20 shadow-2xl">
                 {/* Background Video */}
                 <video
+                  ref={videoRef}
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload="auto"
                   className="absolute inset-0 w-full h-full object-cover"
-                  onError={(e) => {
-                    // Fallback to gradient background on error
-                    e.currentTarget.style.display = 'none'
-                  }}
                 >
                   <source src="/s3_hero_video.mp4" type="video/mp4" />
                 </video>

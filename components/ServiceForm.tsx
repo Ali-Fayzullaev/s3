@@ -1,83 +1,41 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, Phone, User, Car, Loader } from 'lucide-react'
+import { Send, User, Car, MessageCircle } from 'lucide-react'
 import { useApp } from '../lib/context'
-import { sendServiceRequest, ServiceMessage } from '../lib/api/whatsapp'
+import { COMPANY_CONFIG, getWhatsAppServiceLink } from '../lib/company-config'
 
 interface ServiceFormProps {
   serviceName: string
   serviceId: string
 }
 
-export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps) {
-  const { t } = useApp()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showSuccess, setShowSuccess] = useState(false)
+export default function ServiceForm({ serviceName }: ServiceFormProps) {
+  const { t, language } = useApp()
 
   const [formData, setFormData] = useState({
     clientName: '',
-    clientPhone: '',
-    carModel: ''
+    carModel: '',
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleQuickOrder = () => {
+    window.open(getWhatsAppServiceLink(serviceName, language), '_blank')
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    let msg = language === 'ru'
+      ? `Здравствуйте! Хочу заказать услугу: ${serviceName}.`
+      : `Сәлеметсіз бе! Мен қызметке тапсырыс бергім келеді: ${serviceName}.`
+    if (formData.clientName) msg += `\n${language === 'ru' ? 'Имя' : 'Аты'}: ${formData.clientName}`
+    if (formData.carModel) msg += `\n${language === 'ru' ? 'Авто' : 'Авто'}: ${formData.carModel}`
 
-    try {
-      const baseData: ServiceMessage = {
-        serviceName,
-        clientName: formData.clientName,
-        clientPhone: formData.clientPhone,
-        message: `Заявка на услугу: ${serviceName}. ${formData.carModel ? `Автомобиль: ${formData.carModel}` : 'Модель автомобиля не указана.'}`,
-        carModel: formData.carModel || undefined
-      }
-
-      const success = await sendServiceRequest(baseData)
-
-      if (success) {
-        setShowSuccess(true)
-        setFormData({
-          clientName: '',
-          clientPhone: '',
-          carModel: ''
-        })
-        setTimeout(() => setShowSuccess(false), 5000)
-      } else {
-        alert('Ошибка при отправке заявки. Попробуйте еще раз.')
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      alert('Ошибка при отправке заявки. Попробуйте еще раз.')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  if (showSuccess) {
-    return (
-      <div className="bg-card rounded-2xl p-8 shadow-xl border border-green-200">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Send className="w-8 h-8 text-green-600" />
-          </div>
-          <h3 className="text-xl font-bold text-card-foreground mb-2">
-            Заявка отправлена!
-          </h3>
-          <p className="text-muted-foreground">
-            Мы получили вашу заявку и свяжемся с вами в ближайшее время через WhatsApp.
-          </p>
-        </div>
-      </div>
-    )
+    const url = `https://wa.me/${COMPANY_CONFIG.contacts.phone.whatsapp}?text=${encodeURIComponent(msg)}`
+    window.open(url, '_blank')
   }
 
   return (
@@ -86,42 +44,40 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
         {t('orderServiceTitle')}
       </h3>
 
+      {/* Быстрый заказ */}
+      <button
+        onClick={handleQuickOrder}
+        className="w-full mb-6 bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+      >
+        <MessageCircle className="w-5 h-5 mr-2" />
+        {language === 'ru' ? 'Быстрый заказ через WhatsApp' : 'WhatsApp арқылы жылдам тапсырыс'}
+      </button>
+
+      <div className="relative mb-6">
+        <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-border"></div></div>
+        <div className="relative flex justify-center text-sm">
+          <span className="bg-card px-4 text-muted-foreground">
+            {language === 'ru' ? 'или заполните форму' : 'немесе форманы толтырыңыз'}
+          </span>
+        </div>
+      </div>
+
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Client Name */}
         <div>
           <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
             <User className="w-4 h-4 mr-2" />
-            {t('yourName')} *
+            {t('yourName')}
           </label>
           <input
             type="text"
             name="clientName"
             value={formData.clientName}
             onChange={handleInputChange}
-            required
             className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
             placeholder={t('enterName')}
           />
         </div>
 
-        {/* Phone */}
-        <div>
-          <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
-            <Phone className="w-4 h-4 mr-2" />
-            {t('phoneNumber')} *
-          </label>
-          <input
-            type="tel"
-            name="clientPhone"
-            value={formData.clientPhone}
-            onChange={handleInputChange}
-            required
-            className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-            placeholder="+7 (777) 123-45-67"
-          />
-        </div>
-
-        {/* Car Model */}
         <div>
           <label className="flex items-center text-sm font-medium text-card-foreground mb-2">
             <Car className="w-4 h-4 mr-2" />
@@ -137,28 +93,13 @@ export default function ServiceForm({ serviceName, serviceId }: ServiceFormProps
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-primary hover:bg-primary/90 disabled:bg-primary/50 text-primary-foreground py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100 flex items-center justify-center"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
         >
-          {isSubmitting ? (
-            <>
-              <Loader className="w-5 h-5 mr-2 animate-spin" />
-              {t('sendRequest')}...
-            </>
-          ) : (
-            <>
-              <Send className="w-5 h-5 mr-2" />
-              {t('sendRequest')}
-            </>
-          )}
+          <Send className="w-5 h-5 mr-2" />
+          {language === 'ru' ? 'Отправить в WhatsApp' : 'WhatsApp-қа жіберу'}
         </button>
-
-        <p className="text-xs text-muted-foreground text-center">
-          {t('agreeToProcessing')}
-        </p>
       </form>
     </div>
   )

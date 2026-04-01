@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 export default function About() {
-  const { t } = useApp()
+  const { t, language } = useApp()
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const features = [
@@ -107,7 +107,7 @@ export default function About() {
               <Link href="/about">
                 <button className="inline-flex items-center px-6 py-3 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl font-medium transition-all duration-200 transform hover:scale-105">
                   <Eye className="w-4 h-4 mr-2" />
-                  Посмотреть портфолио
+                  {language === 'ru' ? 'Посмотреть портфолио' : 'Портфолионы қарау'}
                 </button>
               </Link>
             </div>
@@ -116,14 +116,14 @@ export default function About() {
             <div className="absolute -top-8 -right-8 bg-card rounded-2xl p-6 shadow-xl border border-border z-10">
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary mb-1">5+</div>
-                <div className="text-sm text-muted-foreground">Лет опыта</div>
+                <div className="text-sm text-muted-foreground">{language === 'ru' ? 'Лет опыта' : 'Жыл тәжірибе'}</div>
               </div>
             </div>
             
             <div className="absolute -bottom-8 -left-8 bg-card rounded-2xl p-6 shadow-xl border border-border z-10">
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary mb-1">1000+</div>
-                <div className="text-sm text-muted-foreground">Довольных клиентов</div>
+                <div className="text-sm text-muted-foreground">{language === 'ru' ? 'Довольных клиентов' : 'Қанағаттанған клиенттер'}</div>
               </div>
             </div>
           </div>

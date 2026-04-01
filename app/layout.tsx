@@ -5,7 +5,7 @@ import { COMPANY_CONFIG } from "../lib/company-config";
 
 export const metadata: Metadata = {
   title: `${COMPANY_CONFIG.name} - ${COMPANY_CONFIG.fullName}`,
-  description: COMPANY_CONFIG.description,
+  description: COMPANY_CONFIG.description.ru,
   keywords: [
     'детейлинг',
     'автодетейлинг', 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: COMPANY_CONFIG.fullName,
-    description: COMPANY_CONFIG.description,
+    description: COMPANY_CONFIG.description.ru,
     url: 'https://s3detailing.kz',
     siteName: COMPANY_CONFIG.name,
     locale: 'ru_KZ',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: COMPANY_CONFIG.fullName,
-    description: COMPANY_CONFIG.description,
+    description: COMPANY_CONFIG.description.ru,
   },
   robots: {
     index: true,

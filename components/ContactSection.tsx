@@ -36,9 +36,9 @@ export default function ContactSection() {
   }
 
   const allPhones = [
-    { label: 'Основной', phone: COMPANY_CONFIG.contacts.phone.main, formatted: COMPANY_CONFIG.contacts.phone.formatted },
+    { label: language === 'ru' ? 'Основной' : 'Негізгі', phone: COMPANY_CONFIG.contacts.phone.main, formatted: COMPANY_CONFIG.contacts.phone.formatted },
     ...COMPANY_CONFIG.contacts.additionalPhones.map(phone => ({
-      label: 'Дополнительный',
+      label: language === 'ru' ? 'Дополнительный' : 'Қосымша',
       phone,
       formatted: phone.replace(/[^\d+]/g, '')
     }))
@@ -97,8 +97,8 @@ export default function ContactSection() {
                     <MapPin className="w-6 h-6 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-card-foreground mb-2">Наш адрес</h3>
-                    <p className="text-muted-foreground mb-4">{COMPANY_CONFIG.contacts.address.full}</p>
+                    <h3 className="text-xl font-bold text-card-foreground mb-2">{language === 'ru' ? 'Наш адрес' : 'Біздің мекен-жайымыз'}</h3>
+                    <p className="text-muted-foreground mb-4">{COMPANY_CONFIG.contacts.address.full[language]}</p>
                     
                     <div className="flex flex-wrap gap-3">
                       <a
@@ -133,7 +133,7 @@ export default function ContactSection() {
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                     <Phone className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold text-card-foreground">Телефоны</h3>
+                  <h3 className="text-xl font-bold text-card-foreground">{language === 'ru' ? 'Телефоны' : 'Телефондар'}</h3>
                 </div>
                 
                 <div className="space-y-4">
@@ -178,7 +178,7 @@ export default function ContactSection() {
                     className="w-full inline-flex items-center justify-center px-6 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105"
                   >
                     <Send className="w-5 h-5 mr-2" />
-                    Написать в WhatsApp
+                    {language === 'ru' ? 'Написать в WhatsApp' : 'WhatsApp-қа жазу'}
                   </a>
                 </div>
               </div>
@@ -189,8 +189,8 @@ export default function ContactSection() {
               <div className="bg-card rounded-2xl overflow-hidden shadow-lg border border-border">
                 <div className="p-6 border-b border-border flex items-center justify-between">
                   <div>
-                    <h3 className="text-xl font-bold text-card-foreground mb-2">Мы на карте</h3>
-                    <p className="text-sm text-muted-foreground">Интерактивная карта с управлением</p>
+                    <h3 className="text-xl font-bold text-card-foreground mb-2">{language === 'ru' ? 'Мы на карте' : 'Біз картада'}</h3>
+                    <p className="text-sm text-muted-foreground">{language === 'ru' ? 'Интерактивная карта' : 'Интерактивті карта'}</p>
                   </div>
                   
                   {/* Map Controls */}
@@ -288,7 +288,7 @@ export default function ContactSection() {
                 <div className="p-4 bg-muted/30 border-t border-border">
                   <div className="flex items-center justify-between">
                     <div className="text-sm text-muted-foreground">
-                      📍 {COMPANY_CONFIG.contacts.address.full}
+                      📍 {COMPANY_CONFIG.contacts.address.full[language]}
                     </div>
                     <div className="flex items-center space-x-3">
                       <button
@@ -308,7 +308,7 @@ export default function ContactSection() {
                       </button>
                       
                       <a
-                        href={getWhatsAppLink(`Здравствуйте! Хочу посетить ваш детейлинг-центр по адресу: ${COMPANY_CONFIG.contacts.address.full}`)}
+                        href={getWhatsAppLink(language === 'ru' ? `Здравствуйте! Хочу посетить ваш детейлинг-центр по адресу: ${COMPANY_CONFIG.contacts.address.full[language]}` : `Сәлеметсіз бе! Детейлинг-орталығыңызға келгім келеді: ${COMPANY_CONFIG.contacts.address.full[language]}`)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center px-3 py-1 bg-green-500 hover:bg-green-600 text-white text-xs rounded-md transition-colors duration-300"
