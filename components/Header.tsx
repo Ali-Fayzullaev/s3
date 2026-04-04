@@ -8,6 +8,7 @@ import Image from "next/image";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const { language, setLanguage, theme, setTheme, t } = useApp();
 
   const navigation = [
@@ -60,31 +61,36 @@ export default function Header() {
           {/* Controls */}
           <div className="flex items-center space-x-2">
             {/* Language Switcher */}
-            <div className="relative group">
-              <button className="flex items-center space-x-1 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+            <div className="relative">
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="flex items-center space-x-1 px-3 py-2 rounded-lg hover:bg-muted transition-colors"
+              >
                 <span className="text-sm font-medium text-foreground">{language.toUpperCase()}</span>
-                <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${isLangOpen ? 'rotate-180' : ''}`} />
               </button>
               
               {/* Language Dropdown */}
-              <div className="absolute right-0 mt-2 w-32 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <button
-                  onClick={() => setLanguage('ru')}
-                  className={`w-full text-left px-3 py-2 text-sm rounded-t-lg hover:bg-muted transition-colors ${
-                    language === 'ru' ? 'bg-primary text-primary-foreground' : 'text-foreground'
-                  }`}
-                >
-                  Русский
-                </button>
-                <button
-                  onClick={() => setLanguage('kz')}
-                  className={`w-full text-left px-3 py-2 text-sm rounded-b-lg hover:bg-muted transition-colors ${
-                    language === 'kz' ? 'bg-primary text-primary-foreground' : 'text-foreground'
-                  }`}
-                >
-                  Қазақша
-                </button>
-              </div>
+              {isLangOpen && (
+                <div className="absolute right-0 mt-2 w-32 bg-card border border-border rounded-lg shadow-lg z-50">
+                  <button
+                    onClick={() => { setLanguage('ru'); setIsLangOpen(false); }}
+                    className={`w-full text-left px-3 py-2 text-sm rounded-t-lg hover:bg-muted transition-colors ${
+                      language === 'ru' ? 'bg-primary text-primary-foreground' : 'text-foreground'
+                    }`}
+                  >
+                    Русский
+                  </button>
+                  <button
+                    onClick={() => { setLanguage('kz'); setIsLangOpen(false); }}
+                    className={`w-full text-left px-3 py-2 text-sm rounded-b-lg hover:bg-muted transition-colors ${
+                      language === 'kz' ? 'bg-primary text-primary-foreground' : 'text-foreground'
+                    }`}
+                  >
+                    Қазақша
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Theme Toggle */}
